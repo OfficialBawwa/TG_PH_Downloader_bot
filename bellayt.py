@@ -28,12 +28,16 @@ s2tw = OpenCC('s2tw.json').convert
 
 @Bellayt.on_message(filters.command("start"))
 async def gstart(_, message: Message):
-      await message.reply_text("""**PornHub Downloader Working as Fuck 💦 Send Link of Pornhub, Xvideos, Xhamster, XnXX ✅**""",
+      await message.reply_text("""**PornHub Downloader Working as Fuck 💦 \nSend Link of Pornhub, Xvideos, Xhamster, XnXX ✅**""",
       reply_markup=InlineKeyboardMarkup(
             [
                 [
                     InlineKeyboardButton(
                         "💦 HARP TECH 💦", url="https://t.me/HARP_Tech")
+                ],
+                [
+                    InlineKeyboardButton(
+                        "💦 HARP Ses Chat 💦", url="https://t.me/HARP_Chat")
                 ]
             ]
         )
@@ -44,16 +48,12 @@ async def gstart(_, message: Message):
                    & filters.regex(YTDL_REGEX))
 async def ytdl_with_button(_, message: Message):
     await message.reply_text(
-        "**Choose download type **",
+        "**To confirm your Download, Press the below button **",
         reply_markup=InlineKeyboardMarkup(
             [
                 [
                     InlineKeyboardButton(
-                        "Audio 🎵",
-                        callback_data="ytdl_audio"
-                    ),
-                    InlineKeyboardButton(
-                        "Video 🎬",
+                        "Download Now 🎬",
                         callback_data="ytdl_video"
                     )
                 ]
@@ -133,7 +133,7 @@ async def callback_query_ytdl_video(_, callback_query):
             await message.reply_chat_action("typing")
             info_dict = ydl.extract_info(url, download=False)
             # download
-            await callback_query.edit_message_text("**Downloading video. Please wait...**")
+            await callback_query.edit_message_text("**Downloading video. Please wait...\n Join @HARP_Chat**")
             ydl.process_info(info_dict)
             # upload
             video_file = ydl.prepare_filename(info_dict)
@@ -169,10 +169,6 @@ async def send_video(message: Message, info_dict, video_file):
         reply_markup=InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton(
-                        "Save ✅",
-                        callback_data="forward_video"
-                    ),
                     InlineKeyboardButton(
                         "Channel 🇱🇰",
                         url="https://t.me/HARP_Tech"
